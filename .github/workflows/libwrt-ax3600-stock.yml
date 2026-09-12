@@ -1,6 +1,9 @@
 name: libwrt-ax3600-stock
 on:
   workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
 env:
   REPO_URL: https://github.com/LiBwrt/openwrt-6.x.git
   REPO_BRANCH: main-nss
@@ -87,7 +90,7 @@ jobs:
     - name: Load Custom Configuration(加载自定义配置)
       run: |
         [ -e files ] && mv files $OPENWRT_PATH/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRT_PATH/.config
+        [ -e $CONFIG_FILE ] && mv $OPENWRT_PATH/.config
         chmod +x $DIY_SCRIPT
         cd $OPENWRT_PATH
         $GITHUB_WORKSPACE/$DIY_SCRIPT
@@ -149,7 +152,7 @@ jobs:
           - 💻 这是 ${{ env.FIRMWARE_TAG }} 平台使用的 OpenWrt 固件
           - ⚽ 固件源码: ${{ env.REPO_URL }}
           - 💝 源码分支: ${{ env.REPO_BRANCH }}
-          - 🌐 默认地址: 192.168.88.1
+          - 🌐 默认地址: 192.168.1.1
           - 🔑 默认密码: 不能说的秘密
           ### 🧊 固件版本
           - 固件内核版本：${{ env.VERSION_KERNEL }}
