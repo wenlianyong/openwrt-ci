@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 env:
-  # 使用ghproxy加速克隆，解决github https拉取报错
-  REPO_URL: https://mirror.ghproxy.com/https://github.com/hanwckf/immortalwrt.git
+  # 使用Gitee镜像，替代github+ghproxy，解决域名解析失败
+  REPO_URL: shturl.cc/gOEOxFTso3pNZvnPTAG8X6q5QYt0WdI
   REPO_BRANCH: openwrt-25.12
   CONFIG_FILE: .config
 
