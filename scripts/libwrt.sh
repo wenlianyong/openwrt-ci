@@ -31,3 +31,20 @@ pushd package/luci-app-natmapt
 umask 022
 git checkout
 popd
+# ===================== DIY自定义部分 开始 =====================
+# 修改OpenWrt默认LAN IP
+sed -i 's/192.168.88.1/192.168.1.13/g' package/base-files/files/bin/config_generate
+
+# 替换opkg源为科大镜像源
+sed -i 's#https://downloads.openwrt.org#https://mirrors.ustc.edu.cn/openwrt#g' package/base-files/files/etc/opkg/distfeeds.conf
+
+# 注释掉源码自带的官方源（备用）
+# sed -i 's#http://downloads.openwrt.org#https://mirrors.ustc.edu.cn/openwrt#g' feeds.conf.default
+
+# 开启中文支持
+sed -i 's/option lang en/option lang zh_cn/g' feeds/luci/modules/luci-base/root/etc/uci-defaults/99-luci
+
+# 设置时区上海
+sed -i 's#UTC#CST-8#g' package/base-files/files/bin/config_generate
+
+# ===================== DIY自定义部分 结束 =====================
